@@ -41,17 +41,19 @@ const Login = () => {
         }
 
         try {
-            // Adjust API call as needed based on your backend logic
-            // Assuming username is email
+            console.log("Attempting login for:", username);
             const res = await axios.post('/login', { email: username, password });
+            console.log("Login Response:", res.data);
+
             if (res.data.success) {
                 localStorage.setItem('token', res.data.token);
                 navigate('/dashboard');
             } else {
+                console.warn("Login failed with response:", res.data);
                 triggerWrongEntry();
             }
         } catch (err) {
-            console.error("Login failed", err);
+            console.error("Login catch error:", err.response ? err.response.data : err.message);
             triggerWrongEntry();
         }
     };

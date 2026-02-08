@@ -12,6 +12,9 @@ Thumbs.db
 dist/
 build/
 
+# Uploads
+backend/uploads/
+
 # Archives
 *.zip
 *.tar

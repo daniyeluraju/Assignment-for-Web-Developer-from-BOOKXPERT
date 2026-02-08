@@ -7,6 +7,16 @@ const path = require('path');
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Global JSON error handler
+app.use((err, req, res, next) => {
+    if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+        console.error('JSON Parsing Error:', err.message);
+        return res.status(400).json({ success: false, message: 'Invalid JSON request' });
+    }
+    next();
+});
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // MySQL Connection
@@ -46,10 +56,27 @@ if (!fs.existsSync('uploads')) {
 
 // Login
 app.post('/login', (req, res) => {
+    console.log("--- LOGIN ATTEMPT ---");
+    console.log("Raw Body:", req.body);
+
     const { email, password } = req.body;
-    if (email === 'admin@gmail.com' && password === '1234') {
+
+    if (!email || !password) {
+        console.log("Error: Missing email or password in request");
+        return res.status(400).json({ success: false, message: 'Email and password are required' });
+    }
+
+    const cleanEmail = email.toString().trim().toLowerCase();
+    const cleanPassword = password.toString().trim();
+
+    console.log(`Comparing: [${cleanEmail}] against [admin@gmail.com]`);
+    console.log(`Comparing: [${cleanPassword}] against [1234]`);
+
+    if (cleanEmail === 'admin@gmail.com' && cleanPassword === '1234') {
+        console.log("Result: SUCCESS");
         res.json({ success: true, token: 'mock-jwt-token', message: 'Login successful' });
     } else {
+        console.log("Result: FAILED (Wrong credentials)");
         res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
 });
@@ -126,7 +153,7 @@ app.put('/employees/status/:id', (req, res) => {
     });
 });
 
-const PORT = 8081;
+const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
