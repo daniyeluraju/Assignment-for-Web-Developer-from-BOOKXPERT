@@ -1,42 +1,56 @@
-<<<<<<< HEAD
-# Employee Management Dashboard - Project Setup
+# Employee Management System
 
-This project is a full-stack Employee Management System using React, Node.js, Express, and MySQL.
+This is a comprehensive Employee Management System using React, Node.js, Express, and MySQL.
 
-## Prerequisites
-- Node.js installed
-- XAMPP installed (for MySQL)
+## 🚀 How to Run This Project
 
-## Database Setup
+If you have cloned this repository, you might notice that the `node_modules` folders are missing. This is intentional to keep the project light. You generally **never** upload `node_modules` to GitHub.
+
+To restore them and run the project, follow these steps:
+
+### 1. Prerequisites
+- **Node.js** installed on your machine.
+- **XAMPP** installed (for MySQL database).
+
+### 2. Database Setup
 1. Open XAMPP and start **Apache** and **MySQL**.
 2. Go to [http://localhost/phpmyadmin](http://localhost/phpmyadmin).
-3. Click on the "SQL" tab.
-4. Copy the content of `database.sql` from the project root and paste it into the query box.
-5. Click **Go** to create the database and table.
+3. Create a new database (e.g., `employee_db`).
+4. Import the `employee_db.sql` file provided in this repository.
 
-## Running the Project
-
-### 1. Backend
-Open a terminal in the `backend` folder:
+### 3. Install Backend Dependencies
+Open a terminal in the `backend` folder and run:
 ```bash
 cd backend
 npm install
+```
+> **Note:** `npm install` reads the `package.json` file and automatically downloads all the necessary libraries (dependencies) into a fresh `node_modules` folder.
+
+Start the backend server:
+```bash
 npm start
 ```
-The server will start on `http://localhost:8081`.
+The server will run on `http://localhost:8081`.
 
-### 2. Frontend
-Open a new terminal in the `frontend` folder:
+### 4. Install Frontend Dependencies
+Open a new terminal in the `frontend` folder and run:
 ```bash
 cd frontend
 npm install
+```
+> **Note:** Just like the backend, this command restores all frontend libraries (React, etc.) into the `frontend/node_modules` folder.
+
+Start the frontend application:
+```bash
 npm start
 ```
-The application will open on `http://localhost:3000`.
+The application will open in your browser at `http://localhost:3000`.
 
-## Credentials
+## 📂 Project Structure
+- **/frontend**: React application code.
+- **/backend**: Node.js & Express API server.
+- **/database**: SQL scripts for database setup.
+
+## 🔑 Login Credentials
 - **Email**: admin@gmail.com
 - **Password**: 1234
-=======
-# Assignment-for-Web-Developer-from-BOOKXPERT
->>>>>>> refs/rewritten/main
